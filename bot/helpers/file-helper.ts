@@ -28,3 +28,14 @@ export const getNextDirectories = (dirPath: string) => {
     });
     return directoryArray;
 };
+
+export const getFilesFromDirectory = (dirPath: string) => {
+    const items = fs.readdirSync(dirPath);
+    let fileArray: string[] = [];
+    items.forEach((item) => {
+        if (fs.statSync(dirPath + "/" + item).isFile()) {
+            fileArray.push(item);
+        }
+    });
+    return fileArray;
+}

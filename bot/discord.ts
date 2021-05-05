@@ -1,6 +1,7 @@
 import * as Path from 'path';
 import { Client, Command, CommandMessage, Discord, Guard, Once } from '@typeit/discord';
-import { NotBot } from './guards/not-bot';
+import { NotBot } from './guards/not-bot.guard';
+
 
 @Discord('!', {
     import: [

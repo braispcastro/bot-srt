@@ -1,6 +1,6 @@
 import { Command, CommandMessage, Description } from '@typeit/discord';
 import { Message, MessageEmbed } from 'discord.js';
-import { SetupHelper } from '../helpers/setup-helper';
+import { SetupHelper } from '../services/setup.service';
 
 
 export abstract class Setups {
@@ -13,6 +13,8 @@ export abstract class Setups {
 
     @Command('setups')
     async setups(command: CommandMessage) {
+        if (command.channel.id !== process.env.SETUPS_CHANNEL_ID) return;
+
         const embedMessage = new MessageEmbed({
             color: '#f1c40f',
             title: 'Proveedor de setups',
@@ -31,6 +33,8 @@ export abstract class Setups {
     @Command('craig')
     @Description('Craig A. Williams')
     async craig(command: CommandMessage) {
+        if (command.channel.id !== process.env.SETUPS_CHANNEL_ID) return;
+
         const embedMessage = new MessageEmbed({
             color: '#27ae60',
             title: 'Craig\'s Setup Shop',
@@ -45,6 +49,8 @@ export abstract class Setups {
     @Command('vrs')
     @Description('Virtual Racing School')
     async vrs(command: CommandMessage) {
+        if (command.channel.id !== process.env.SETUPS_CHANNEL_ID) return;
+
         const embedMessage = new MessageEmbed({
             color: '#e74c3c',
             title: 'Virtual Racing School',
@@ -59,6 +65,8 @@ export abstract class Setups {
     @Command('pure')
     @Description('Pure Driving School')
     async pure(command: CommandMessage) {
+        if (command.channel.id !== process.env.SETUPS_CHANNEL_ID) return;
+        
         const embedMessage = new MessageEmbed({
             color: '#2980b9',
             title: 'Pure Driving School',
