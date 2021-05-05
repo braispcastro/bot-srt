@@ -67,8 +67,10 @@ export class SetupHelper {
             carsToShow = carsToShow.concat(`${index + 1}.- ${car}\n`);
         })
 
-        message.embeds[0].setTitle('Coche');
+        message.embeds[0].setTitle('Craig\'s Setup Shop');
+        message.embeds[0].setURL('https://craigsetupshop.co.uk/');
         message.embeds[0].setDescription(carsToShow);
+        message.embeds[0].setThumbnail('https://craigsetupshop.co.uk/img/kreg_social_media.jpg');
         message.edit(message.embeds[0]);
 
         let reactionArray: string[] = ['◀️', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '▶️']
