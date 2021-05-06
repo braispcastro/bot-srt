@@ -294,6 +294,9 @@ export class SetupHelper {
     private async sendSetups(message: Message) {
         
         const files = getFilesFromDirectory(this.currentPath);
+
+        if (!files) return;
+
         files.forEach((file) => message.channel.send(new MessageAttachment(path.join(this.currentPath, file))));
 
         message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
