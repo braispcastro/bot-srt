@@ -1,5 +1,6 @@
 import path from 'path';
 import { Message, MessageAttachment } from 'discord.js';
+import { CommandMessage } from '@typeit/discord';
 import { getNextDirectories, getFilesFromDirectory } from '../helpers/file-helper';
 
 
@@ -13,6 +14,22 @@ export class SetupHelper {
 
     constructor() {
 
+    }
+
+    async getCraigSetupFromPath(command: CommandMessage, setupPath: string) {
+
+        this.currentPath = `./setups/craig`;
+        const pathArray = setupPath.split('/');
+        pathArray.forEach(item => {
+            this.currentPath = path.join(this.currentPath, item);
+        });
+        
+        const files = getFilesFromDirectory(this.currentPath);
+        if (files) {
+            files.forEach((file) => command.channel.send(new MessageAttachment(path.join(this.currentPath, file))));
+        } else {
+            await command.react('❌');
+        }
     }
 
     async selectProvider(message: Message) {
@@ -257,25 +274,34 @@ export class SetupHelper {
                     this.craigSelectSeason(message, userId);
                 } else if (reaction?.emoji.name === '1️⃣' && seasons[0]) {
                     this.currentPath += `/${seasons[0]}`;
-                    const files = getFilesFromDirectory(this.currentPath);
-                    files.forEach((file) => message.channel.send(new MessageAttachment(path.join(this.currentPath, file))));
+                    this.sendSetups(message);
                 } else if (reaction?.emoji.name === '2️⃣' && seasons[1]) {
                     this.currentPath += `/${seasons[1]}`;
-                    const files = getFilesFromDirectory(this.currentPath);
-                    files.forEach((file) => message.channel.send(new MessageAttachment(path.join(this.currentPath, file))));
+                    this.sendSetups(message);
                 } else if (reaction?.emoji.name === '3️⃣' && seasons[2]) {
                     this.currentPath += `/${seasons[2]}`;
-                    const files = getFilesFromDirectory(this.currentPath);
-                    files.forEach((file) => message.channel.send(new MessageAttachment(path.join(this.currentPath, file))));
+                    this.sendSetups(message);
                 } else if (reaction?.emoji.name === '4️⃣' && seasons[3]) {
                     this.currentPath += `/${seasons[3]}`;
-                    const files = getFilesFromDirectory(this.currentPath);
-                    files.forEach((file) => message.channel.send(new MessageAttachment(path.join(this.currentPath, file))));
+                    this.sendSetups(message);
                 }
             })
             .catch(error => {
                 console.log('error:', error);
             });
+    }
+
+    private async sendSetups(message: Message) {
+        
+        const files = getFilesFromDirectory(this.currentPath);
+        files.forEach((file) => message.channel.send(new MessageAttachment(path.join(this.currentPath, file))));
+
+        message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+        message.embeds[0].fields.splice(0);
+        message.embeds[0].addField('Ruta', this.currentPath);
+        message.embeds[0].setDescription('Setup seleccionada correctamente...');
+        message.embeds[0].setFooter('');
+        message.edit(message.embeds[0]);
     }
 
 }

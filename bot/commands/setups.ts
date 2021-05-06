@@ -30,20 +30,12 @@ export abstract class Setups {
             .catch((error) => console.log(error));
     }
 
-    @Command('craig')
+    @Command('craig :path')
     @Description('Craig A. Williams')
     async craig(command: CommandMessage) {
         if (command.channel.id !== process.env.SETUPS_CHANNEL_ID) return;
 
-        const embedMessage = new MessageEmbed({
-            color: '#27ae60',
-            title: 'Craig\'s Setup Shop',
-            url: 'https://craigsetupshop.co.uk/',
-            description: '',
-            timestamp: new Date()
-        });
-        embedMessage.setThumbnail('https://craigsetupshop.co.uk/img/kreg_social_media.jpg');
-        command.channel.send(embedMessage);
+        this.setupHelper.getCraigSetupFromPath(command, command.args.path);
     }
 
     @Command('vrs')

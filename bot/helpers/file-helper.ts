@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { dir } from 'node:console';
 import path from 'path';
 
 
@@ -30,6 +31,9 @@ export const getNextDirectories = (dirPath: string) => {
 };
 
 export const getFilesFromDirectory = (dirPath: string) => {
+
+    if (!fs.existsSync(dirPath)) return;
+
     const items = fs.readdirSync(dirPath);
     let fileArray: string[] = [];
     items.forEach((item) => {
