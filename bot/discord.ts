@@ -5,7 +5,10 @@ import { NotBot } from './guards/not-bot.guard';
 
 @Discord('!', {
     import: [
-        Path.join(__dirname, 'commands', 'setups.js')
+        Path.join(__dirname, 'commands', 'setups.js'),
+        Path.join(__dirname, 'commands', 'craig.js'),
+        Path.join(__dirname, 'commands', 'pure.js'),
+        Path.join(__dirname, 'commands', 'vrs.js')
     ]
 })
 export abstract class DiscordApp {
