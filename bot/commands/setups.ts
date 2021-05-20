@@ -1,4 +1,5 @@
 import path from 'path';
+import { version } from '../../package.json';
 import { Command, CommandMessage } from '@typeit/discord';
 import { Message, MessageEmbed, MessageAttachment } from 'discord.js';
 import { getNextDirectories, getFilesFromDirectory } from '../helpers/file-helper';
