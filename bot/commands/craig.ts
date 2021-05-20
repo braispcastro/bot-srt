@@ -1,7 +1,7 @@
 import path from 'path';
 import { Description, Command, CommandMessage } from '@typeit/discord';
 import { MessageAttachment } from 'discord.js';
-import { getFilesFromDirectory } from '../helpers/file-helper';
+import { getFilesFromDirectory, hasSeasonDirectory } from '../helpers/file-helper';
 
 
 export abstract class Craig {
@@ -23,6 +23,10 @@ export abstract class Craig {
         pathArray.forEach(item => {
             this.currentPath = path.join(this.currentPath, item);
         });
+
+        if (!hasSeasonDirectory(this.currentPath)) {
+            this.currentPath = path.join(this.currentPath, process.env.DEFAULT_SEASON!);
+        }
         
         const files = getFilesFromDirectory(this.currentPath);
         if (files) {

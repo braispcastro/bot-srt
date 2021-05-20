@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { dir } from 'node:console';
 import path from 'path';
 
 
@@ -42,4 +41,18 @@ export const getFilesFromDirectory = (dirPath: string) => {
         }
     });
     return fileArray;
+}
+
+export const hasSeasonDirectory = (dirPath: string) => {
+    
+    if (!fs.existsSync(dirPath)) return false;
+
+    const items = fs.readdirSync(dirPath);
+    for(let item of items) {
+        if (fs.statSync(dirPath + "/" + item).isFile()) {
+            return true;
+        }
+    }
+
+    return false;
 }
