@@ -239,6 +239,13 @@ export abstract class Setups {
 
         let seasonsToShow = '\n';
         const seasons = this.nextDirectories.slice(this.startIndex, this.startIndex + this.itemsToShow);
+
+        if (seasons.length == 1) {
+            this.currentPath += `/${seasons[0]}`;
+            this.sendSetups(message);
+            return;
+        }
+
         seasons.forEach((season, index) => {
             seasonsToShow = seasonsToShow.concat(`${index + 1}.- ${season}\n`);
         });
