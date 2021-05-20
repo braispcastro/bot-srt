@@ -28,6 +28,8 @@ export abstract class Setups {
             timestamp: new Date()
         });
 
+        embedMessage.setFooter(`v${version}`);
+
         command.channel.send(embedMessage)
             .then(async(message: Message) => {
                 this.currentEmbedId = message.id;
@@ -95,8 +97,8 @@ export abstract class Setups {
         message.embeds[0].setDescription(carsToShow);
         message.embeds[0].fields.splice(0);
         message.embeds[0].addField('Ruta', this.currentPath);
+        message.embeds[0].addField('Página', `${this.startIndex / this.itemsToShow + 1}/${Math.ceil(this.nextDirectories.length / this.itemsToShow)}`);
         message.embeds[0].setThumbnail('https://craigsetupshop.co.uk/img/kreg_social_media.jpg');
-        message.embeds[0].setFooter(`${this.startIndex / this.itemsToShow + 1}/${Math.ceil(this.nextDirectories.length / this.itemsToShow)}`);
         message.edit(message.embeds[0]);
 
         let reactionArray: string[] = ['◀️', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '▶️']
@@ -171,7 +173,7 @@ export abstract class Setups {
         message.embeds[0].setDescription(circuitsToShow);
         message.embeds[0].fields.splice(0);
         message.embeds[0].addField('Ruta', this.currentPath);
-        message.embeds[0].setFooter(`${this.startIndex / this.itemsToShow + 1}/${Math.ceil(this.nextDirectories.length / this.itemsToShow)}`);
+        message.embeds[0].addField('Página', `${this.startIndex / this.itemsToShow + 1}/${Math.ceil(this.nextDirectories.length / this.itemsToShow)}`);
         message.edit(message.embeds[0]);
 
         let reactionArray: string[] = ['◀️', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '▶️']
@@ -254,7 +256,7 @@ export abstract class Setups {
         message.embeds[0].setDescription(seasonsToShow);
         message.embeds[0].fields.splice(0);
         message.embeds[0].addField('Ruta', this.currentPath);
-        message.embeds[0].setFooter(`${this.startIndex / this.itemsToShow + 1}/${Math.ceil(this.nextDirectories.length / this.itemsToShow)}`);
+        message.embeds[0].addField('Página', `${this.startIndex / this.itemsToShow + 1}/${Math.ceil(this.nextDirectories.length / this.itemsToShow)}`);
         message.edit(message.embeds[0]);
 
         let reactionArray: string[] = ['◀️', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '▶️']
@@ -313,7 +315,7 @@ export abstract class Setups {
         message.embeds[0].fields.splice(0);
         message.embeds[0].addField('Ruta', this.currentPath);
         message.embeds[0].setDescription('Setup seleccionada correctamente...');
-        message.embeds[0].setFooter('');
+        // message.embeds[0].setFooter('');
         message.edit(message.embeds[0]);
     }
 }
